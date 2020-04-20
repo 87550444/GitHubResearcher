@@ -80,7 +80,7 @@ class ListScreenViewModel {
             let task = URLSession(configuration: .default).dataTask(with: url) { [weak self] data, response, error in
                 guard let self = self else { return }
                 guard error == nil, let httpResponse = response as? HTTPURLResponse,
-                    (200...299).contains(httpResponse.statusCode), let data = data else { return }
+                    (200...299).contains(httpResponse.statusCode), let data = data, index < self.userCellModels.count else { return }
                 self.cache.setObject(data as AnyObject, forKey: url.absoluteString as AnyObject)
                 self.userCellModels[index].avatarImage = UIImage(data: data)
                 self.delegate?.reloadCellAt(row: index)

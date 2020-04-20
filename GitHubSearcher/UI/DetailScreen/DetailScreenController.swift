@@ -108,7 +108,7 @@ extension DetailScreenController:UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellOptional = tableView.dequeueReusableCell(withIdentifier: StringConstants.repoCell.rawValue) as? RepoCell
-        guard let cell = cellOptional else {
+        guard let cell = cellOptional, indexPath.row < viewModel.repos.count else {
             return UITableViewCell()
         }
         let repoItems = viewModel.repos
